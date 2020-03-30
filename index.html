@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Introduction</title>
+</head>
+<body>
+    <h1>A Message from the Server Side</h1>
+    <p id="message"></p>
+
+<script type="text/javascript">
+    //Create XHR Object - XML HTTP Request
+    let xhr = new XMLHttpRequest();
+
+    // Set XHR to initialize a GET Request to the Server
+    xhr.open("GET", "greetings.php", true);
+
+    // Send the Request and Get the Response Text
+    xhr.send();
+    console.log("#1 : Loading... Please Wait...");
+
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4) {
+            if(xhr.status == 200) {
+                console.log("#4 : Request is Complete");
+                document.getElementById("message")
+                    .innerHTML = xhr.responseText;
+                // alert("Connection Done!");
+            } else if(xhr.status == 404) {
+                console.log("#4 : The requested page does not Exist");
+            } else {
+                console.log("Other Error");
+            }
+        } else if(xhr.readyState == 3) {
+            console.log("#3 : Server is Interactive");
+            // alert("Error");
+        } else if(xhr.readyState == 2) {
+            console.log("#2 : Loading... Done");
+        } else {
+            console.log("#1 : Loading...Please Wait...");
+        }
+    }
+
+
+</script>
+</body>
+</html>
